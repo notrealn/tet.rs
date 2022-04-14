@@ -9,7 +9,6 @@ use crossterm::{
     ExecutableCommand, Result,
 };
 use fastrand::shuffle;
-use figlet_rs::{FIGfont, FIGure};
 use std::io;
 use std::time::Duration;
 use std::vec::Vec;
@@ -30,16 +29,13 @@ fn main() -> Result<()> {
 }
 
 fn title_screen() -> Result<TitleSelectOptions> {
-    let font = FIGfont::from_file("resources/smslant.flf").unwrap();
-    let title = font.convert("Tet.rs").unwrap();
-
-    // let title = "\r\n ______       __  \r\n/_  __/ ___  / /_     ____  ___\r\n / /   / -_)/ __/ _  / __/ (_-<\r\n/_/    \\__/ \\__/ (_)/_/   /___/";
+    let title = "\r ______       __  \r\n/_  __/ ___  / /_     ____  ___\r\n / /   / -_)/ __/ _  / __/ (_-<\r\n/_/    \\__/ \\__/ (_)/_/   /___/";
     let mut selected = TitleSelectOptions::Start;
 
     loop {
         io::stdout()
             .execute(Clear(ClearType::All))?
-            .execute(Print(figure_to_string(&title)))?
+            .execute(Print(title))?
             .execute(Print("\r\nTetris in the command line, made in rust.\r\nUse A/D/ENTER to navigate menus.\r\n\n"))?
             .execute(Print(match selected {
                 TitleSelectOptions::Start => "[Start] Controls Exit",
@@ -86,7 +82,8 @@ fn title_screen() -> Result<TitleSelectOptions> {
 fn controls_screen() -> Result<()> {
     io::stdout()
         .execute(Clear(ClearType::All))?
-        .execute(Print("\rControls: (press any key to leave)\r\n"))?
+        .execute(Print("\r  _____          __           __  \r\n / ___/__  ___  / /________  / /__\r\n/ /__/ _ \\/ _ \\/ __/ __/ _ \\/ (_-<\r\n\\___/\\___/_//_/\\__/_/  \\___/_/___/\r\n"))?
+        .execute(Print("\r(press any key to leave)\r\n"))?
         .execute(Print(
             [
                 "a:\tsoft move left",
@@ -239,21 +236,6 @@ fn game_screen() -> Result<()> {
     io::stdout().execute(LeaveAlternateScreen)?;
 
     Ok(())
-}
-
-fn figure_to_string(figure: &FIGure) -> String {
-    let mut string = String::from("\r");
-
-    for i in 0..figure.height {
-        for character in &figure.characters {
-            if let Some(line) = character.characters.get(i as usize) {
-                string.push_str(&line);
-            }
-        }
-        string.push_str("\r\n");
-    }
-
-    string
 }
 
 fn state_to_string(state: &GameState) -> String {
