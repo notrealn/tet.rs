@@ -99,6 +99,7 @@ fn controls_screen() -> Result<()> {
                 "k:\trotate right",
                 "l:\trotate twice",
                 ";:\thold piece",
+                "\r\nYou can also use ctr+c to exit or end the game.",
             ]
             .join("\r\n"),
         ))?;
