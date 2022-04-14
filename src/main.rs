@@ -1,3 +1,8 @@
+/*
+    crossterm, a crossplatform terminal library for manipulating terminals.
+    owner: https://crates.io/users/TimonPost
+    crate: https://crates.io/crates/crossterm
+*/
 use crossterm::{
     cursor::MoveTo,
     event::{poll, read, Event, KeyCode, KeyModifiers},
@@ -8,7 +13,14 @@ use crossterm::{
     },
     ExecutableCommand, Result,
 };
+/*
+    fastrand, a simple and fast random number generator.
+    owners: https://crates.io/teams/github:smol-rs:admins
+            https://crates.io/users/taiki-e
+    crate: https://crates.io/crates/crossterm
+*/
 use fastrand::shuffle;
+// standard libraries
 use std::io;
 use std::time::Duration;
 use std::vec::Vec;
