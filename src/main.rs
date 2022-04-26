@@ -1,4 +1,8 @@
 /*
+    note on library citations:
+    Rust has packages called crates. The urls shown below link to the user page or repository of the library.
+*/
+/*
     crossterm, a crossplatform terminal library for manipulating terminals.
     owner: https://crates.io/users/TimonPost
     crate: https://crates.io/crates/crossterm
@@ -20,7 +24,7 @@ use crossterm::{
     crate: https://crates.io/crates/crossterm
 */
 use fastrand::shuffle;
-// standard libraries
+// standard libraries (these come with rust)
 use std::io;
 use std::time::Duration;
 use std::vec::Vec;
@@ -47,6 +51,7 @@ fn title_screen() -> Result<TitleSelectOptions> {
     loop {
         io::stdout()
             .execute(Clear(ClearType::All))?
+            .execute(MoveTo(0, 0))?
             .execute(Print(title))?
             .execute(Print("\r\nTetris in the command line, made in rust.\r\nUse A/D/ENTER to navigate menus.\r\n\n"))?
             .execute(Print(match selected {
@@ -94,6 +99,7 @@ fn title_screen() -> Result<TitleSelectOptions> {
 fn controls_screen() -> Result<()> {
     io::stdout()
         .execute(Clear(ClearType::All))?
+        .execute(MoveTo(0, 0))?
         .execute(Print("\r  _____          __           __  \r\n / ___/__  ___  / /________  / /__\r\n/ /__/ _ \\/ _ \\/ __/ __/ _ \\/ (_-<\r\n\\___/\\___/_//_/\\__/_/  \\___/_/___/\r\n"))?
         .execute(Print("\r(press any key to leave)\r\n"))?
         .execute(Print(
