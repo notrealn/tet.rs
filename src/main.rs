@@ -136,6 +136,7 @@ fn game_screen() -> Result<()> {
     // use Cell::*;
     // [x][y]
     let mut state = GameState {
+        // shorthand for making an array with 10 arrays, each with 20 tiles
         matrix: [[Tile::None; 20]; 10],
         tetrimino: generate_tetrimino(Tile::None),
         game_over: false,
